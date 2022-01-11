@@ -34,6 +34,7 @@ int main(int argc, char **argv)
             printf("Commands[i]: %s\n", commands[i]);
             buffer2 = strtok(NULL, " ");
         }
+        printf("hello");
     }
     /*
     for (; i <= nread; i++)
