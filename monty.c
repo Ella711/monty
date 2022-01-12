@@ -3,7 +3,7 @@
 int main(int argc, char **argv)
 {
     FILE *check = NULL;
-    stack_t *nodo = NULL;
+    stack_t *node = NULL;
     char *buffer = NULL, *buffer2 = NULL;
     size_t len = 0;
     ssize_t nread;
@@ -31,15 +31,15 @@ int main(int argc, char **argv)
         }
         command_t.number = commands[1];
         f = select_command(commands);
-        f(&nodo, line_counter);
+        f(&node, line_counter);
         if (f == NULL)
         {
             printf("semurio\n");
         }
        /*nodo = create_node_with_data(commands[1]);*/
     }
-    fclose(check);
-    /*free(commands);*/
+    free(commands);
     free(buffer);
+    fclose(check);
     return (0);
 }

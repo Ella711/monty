@@ -32,7 +32,9 @@ void push(stack_t **stack, unsigned int line_number)
     {
         command_converted = atoi(command_t.number);
         add_dnodeint(stack, command_converted);
+        free_stack_t(stack);
     }
+    
 }
 
 void pall(stack_t **stack, unsigned int line_number)

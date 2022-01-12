@@ -31,3 +31,37 @@ stack_t *add_dnodeint(stack_t **head, const int n)
 	}
 	return (new_node);
 }
+
+/**
+ * free_dlistint - frees list
+ * @head: pointer to head of list
+ */
+void free_stack_t(stack_t **head)
+{
+	stack_t *traverse;
+
+	if (*head == NULL)
+		return;
+
+	while (*head != NULL)
+	{
+		traverse = *head;
+		(*head) = (*head)->next;
+		free(traverse);
+	}
+}
+/*void free_list(char **commands)
+{
+	if (*commands)
+	{
+		free_list(commands + 1);
+		free(*commands);
+	}
+}
+
+void free_all(char **tokens, char *line)
+{
+	free_list(tokens);
+	free(tokens);
+	free(line);
+}*/
