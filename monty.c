@@ -3,7 +3,7 @@
 int main(int argc, char **argv)
 {
     FILE *check = NULL;
-    /*stack_t *nodo = NULL;*/
+    stack_t *nodo = NULL;
     char *buffer = NULL, *buffer2 = NULL;
     size_t len = 0;
     ssize_t nread;
@@ -12,9 +12,7 @@ int main(int argc, char **argv)
     char **commands = malloc(buff_std * sizeof(char *));
 
     if (argc == 2)
-    {
         check = file_open(argv[1]);
-    }
     else
     {
         fprintf(stderr, "USAGE: monty file\n");
@@ -22,25 +20,26 @@ int main(int argc, char **argv)
     }
     for (line_counter = 1; (nread = getline(&buffer, &len, check)) != -1; line_counter++)
     {
+        
         printf("Getline: %s\n", buffer);
         printf("Line counter: %d\n", line_counter);
-        buffer2 = strtok(buffer, " ");
+        buffer2 = strtok(buffer, " \n\t$");
         for (i = 0; buffer2; i++)
         {
             commands[i] = buffer2;
-            printf("Commands[i]: %s", commands[i]);
-            buffer2 = strtok(NULL, " ");
+            buffer2 = strtok(NULL, " \n\t$");
         }
-        f = select_command(commands[0]);
+        command_t.number = commands[1];
+        f = select_command(commands);
+        f(&nodo, line_counter);
         if (f == NULL)
         {
-            printf("a");
+            printf("semurio\n");
         }
-        
-        /*nodo = create_node_with_data(commands[1]);*/
-
-        printf("Commands: %s", commands[1]);
+       /*nodo = create_node_with_data(commands[1]);*/
     }
-
+    fclose(check);
+    /*free(commands);*/
+    free(buffer);
     return (0);
 }
