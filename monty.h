@@ -10,6 +10,7 @@
 #include <string.h>
 
 #define buffstd 64
+extern char commands[1];
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -40,5 +41,11 @@ typedef struct instruction_s
     char *opcode;
     void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+FILE *file_open(char *argv);
+void (*select_command(char *token))(stack_t **stack, unsigned int line_number);
+stack_t *add_dnodeint_end(stack_t **head, const int n);
+stack_t *create_node_with_data(int number);
+void push(stack_t **stack, unsigned int line_number);
 
 #endif

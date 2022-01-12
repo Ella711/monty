@@ -3,20 +3,17 @@
 int main(int argc, char **argv)
 {
     FILE *check = NULL;
+    /*stack_t *nodo = NULL;*/
     char *buffer = NULL, *buffer2 = NULL;
     size_t len = 0;
     ssize_t nread;
+    void (*f)(stack_t * *stack, unsigned int line_number);
     int line_counter = 0, buff_std = buffstd, i = 0;
     char **commands = malloc(buff_std * sizeof(char *));
 
     if (argc == 2)
     {
-        check = fopen(argv[1], "r");
-        if (check == NULL)
-        {
-            fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-            return (EXIT_FAILURE);
-        }
+        check = file_open(argv[1]);
     }
     else
     {
@@ -31,17 +28,19 @@ int main(int argc, char **argv)
         for (i = 0; buffer2; i++)
         {
             commands[i] = buffer2;
-            printf("Commands[i]: %s\n", commands[i]);
+            printf("Commands[i]: %s", commands[i]);
             buffer2 = strtok(NULL, " ");
         }
-    }
-    /*
-    for (; i <= nread; i++)
-    {
-        if (buffer[i] != " ")
+        f = select_command(commands[0]);
+        if (f == NULL)
         {
+            printf("a");
         }
-    }*/
-    
+        
+        /*nodo = create_node_with_data(commands[1]);*/
+
+        printf("Commands: %s", commands[1]);
+    }
+
     return (0);
 }
