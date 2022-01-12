@@ -38,6 +38,7 @@ int main(int argc, char **argv)
         }
        /*nodo = create_node_with_data(commands[1]);*/
     }
+    free_stack_t(&node);
     free(commands);
     free(buffer);
     fclose(check);
