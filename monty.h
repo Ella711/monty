@@ -8,9 +8,14 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#include <ctype.h>
 
 #define buffstd 64
-extern char commands[1];
+
+struct command_s
+{
+    char *number;
+} command_t;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -43,9 +48,10 @@ typedef struct instruction_s
 } instruction_t;
 
 FILE *file_open(char *argv);
-void (*select_command(char *token))(stack_t **stack, unsigned int line_number);
-stack_t *add_dnodeint_end(stack_t **head, const int n);
-stack_t *create_node_with_data(int number);
+void (*select_command(char **token))(stack_t **stack, unsigned int line_number);
+stack_t *add_dnodeint(stack_t **head, const int n);
+stack_t *create_node_with_data(stack_t **head, int number);
 void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 
 #endif
