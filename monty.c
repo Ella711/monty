@@ -10,6 +10,7 @@ int main(int argc, char **argv)
     void (*f)(stack_t **stack, unsigned int line_number);
     int line_counter = 0, buff_std = buffstd, i = 0;
     char **commands = malloc(buff_std * sizeof(char *));
+    
     if (commands == NULL)
     {
         fprintf(stderr, "Error: malloc failed\n");
@@ -17,10 +18,11 @@ int main(int argc, char **argv)
     }
 
     if (argc == 2)
-        check = file_open(argv[1]);
+        check = file_open(argv[1]);   
     else
     {
         fprintf(stderr, "USAGE: monty file\n");
+        free(commands);
         return (EXIT_FAILURE);
     }
     for (line_counter = 1; (nread = getline(&buffer, &len, check)) != -1; line_counter++)

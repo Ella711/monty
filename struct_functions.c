@@ -9,6 +9,9 @@ void (*select_command(char **token))(stack_t **stack, unsigned int line_number)
         {"pall", pall},
         {"pint", pint},
         {"pop", pop},
+        {"swap", swap},
+        {"add", add},
+        {"nop", nop},
         {NULL, NULL}};
 
     for (; op_functions[i].opcode; i++)
@@ -67,23 +70,9 @@ void pop(stack_t **stack, unsigned int line_number)
 {
     stack_t *temp = *stack;
 
-    printf("Head is here before popping: %d\n", (*stack)->n);
-
     if (*stack == NULL)
         fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-
     *stack = (*stack)->next;
     free(temp);
     /*printf("Head is here: %d\n", (*stack)->n);*/
 }
-/*
-stack_t *create_node_with_data(stack_t **head,int number)
-{
-
-    stack_t *node = malloc(sizeof(stack_t));
-    node->n = number;
-    node->prev = NULL;
-    node->next = NULL;
-
-    return (node);
-}*/
