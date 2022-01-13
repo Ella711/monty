@@ -46,20 +46,21 @@ int main(int argc, char **argv)
             /*printf("commands[i - 1]: %s\n", commands[i]);*/
             if (strcmp(commands[i], "push") == 0)
             {
+                if (i >= 2)
+                    break;
                 if (buffer2 == NULL)
                 {
-                    fprintf(stderr, "USAGE: monty file\n");
+                    fprintf(stderr, "L%d: usage: push integer\n", line_counter);
                     free(buffer);
+                    free_stack_t(&head);
                     free(commands);
                     fclose(check);
                     return (EXIT_FAILURE);
                 }
             }
-
-            if (i > 2)
-                continue;
             /*printf("Commands[i]: %s\n", commands[i]);*/
         }
+
         command_t.number = commands[1];
         command_t.instructions = commands;
         f = select_command(commands);
