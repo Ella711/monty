@@ -18,7 +18,10 @@ int main(int argc, char **argv)
     }
 
     if (argc == 2)
-        check = file_open(argv[1]);   
+    {
+        check = file_open(argv[1]);
+        command_t.store_check = check;
+    }   
     else
     {
         fprintf(stderr, "USAGE: monty file\n");
@@ -31,24 +34,27 @@ int main(int argc, char **argv)
             continue;
         /*printf("Getline: %s\nnread: %ld\n", buffer, nread);
         printf("Line counter: %d\n", line_counter);*/
-        buffer2 = strtok(buffer, " \n\t$");
+        buffer2 = strtok(buffer, " \n\t$#");
+        command_t.line = buffer;
         if (buffer2 == NULL)
             continue;
         for (i = 0; buffer2; i++)
         {
             commands[i] = buffer2;
-            buffer2 = strtok(NULL, " \n\t$");
+            buffer2 = strtok(NULL, " \n\t$#");
             if (i > 2)
                 continue;
             /*printf("Commands[i]: %s\n", commands[i]);*/
         }
         command_t.number = commands[1];
+        command_t.instructions = commands;
         f = select_command(commands);
         if (f == NULL)
         {
             fprintf(stderr, "L%d: unknown instruction %s\n", line_counter, commands[0]);
             free(buffer);
             free(commands);
+            free_stack_t(&head);
             fclose(check);
             return (0);
         }

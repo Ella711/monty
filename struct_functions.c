@@ -27,12 +27,15 @@ void (*select_command(char **token))(stack_t **stack, unsigned int line_number)
 void push(stack_t **stack, unsigned int line_number)
 {
     int command_converted = 0;
-    /*
-    printf("string:%s", command_t.number);*/
+    
+    /*printf("string: %s\n", command_t.number);*/
 
-    if (isdigit(command_t.number[0]) == 0)
+    if (isdigit_str(command_t.number) == 0)
     {
         fprintf(stderr, "L%d: usage: push integer\n", line_number);
+        free(command_t.instructions);
+        free(command_t.line);
+        fclose(command_t.store_check);
         exit(EXIT_FAILURE);
     }
     else
@@ -61,6 +64,9 @@ void pint(stack_t **stack, unsigned int line_number)
     if (*stack == NULL)
     {
         fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+        free(command_t.instructions);
+        free(command_t.line);
+        fclose(command_t.store_check);
         exit(EXIT_FAILURE);
     }
     printf("%d\n", (*stack)->n);
@@ -71,7 +77,13 @@ void pop(stack_t **stack, unsigned int line_number)
     stack_t *temp = *stack;
 
     if (*stack == NULL)
+    {
         fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+        free(command_t.instructions);
+        free(command_t.line);
+        fclose(command_t.store_check);
+        exit(EXIT_FAILURE);
+    }
     *stack = (*stack)->next;
     free(temp);
     /*printf("Head is here: %d\n", (*stack)->n);*/

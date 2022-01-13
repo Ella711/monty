@@ -12,3 +12,22 @@ FILE *file_open(char *argv)
     }
     return (check);
 }
+
+int isdigit_str(char *token)
+{
+	int i = 0;
+	
+	if (token == NULL)
+		return(0);
+	
+	if (token[i] == '-')
+		i++;
+	
+	while (token[i])
+	{
+		if (isdigit(token[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
