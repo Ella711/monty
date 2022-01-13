@@ -25,10 +25,13 @@ int main(int argc, char **argv)
     }
     for (line_counter = 1; (nread = getline(&buffer, &len, check)) != -1; line_counter++)
     {
-        
-        /*printf("Getline: %s\n", buffer);
+        if (nread == 2)
+            continue;
+        /*printf("Getline: %s\nnread: %ld\n", buffer, nread);
         printf("Line counter: %d\n", line_counter);*/
         buffer2 = strtok(buffer, " \n\t$");
+        if (buffer2 == NULL)
+            continue;
         for (i = 0; buffer2; i++)
         {
             commands[i] = buffer2;
