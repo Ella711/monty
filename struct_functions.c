@@ -50,6 +50,9 @@ void pall(stack_t **stack, unsigned int line_number)
 {
     const stack_t *temp = *stack;
     (void)line_number;
+
+    if (!stack)
+        return;
     
     while (temp)
     {
@@ -61,7 +64,7 @@ void pall(stack_t **stack, unsigned int line_number)
 
 void pint(stack_t **stack, unsigned int line_number)
 {
-    if (*stack == NULL)
+    if (!*stack || !stack)
     {
         fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
         free(command_t.instructions);
@@ -76,7 +79,7 @@ void pop(stack_t **stack, unsigned int line_number)
 {
     stack_t *temp = *stack;
 
-    if (*stack == NULL)
+    if (*stack || !stack)
     {
         fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
         free(command_t.instructions);
