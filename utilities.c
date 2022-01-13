@@ -1,6 +1,6 @@
 #include "monty.h"
 
-FILE *file_open(char *argv)
+FILE *file_open(char *argv, char **commands)
 {
     FILE *check = NULL;
     check = fopen(argv, "r");
@@ -8,6 +8,7 @@ FILE *file_open(char *argv)
     if (check == NULL)
     {
         fprintf(stderr, "Error: Can't open file %s\n", argv);
+	free(commands);
         exit(EXIT_FAILURE);
     }
     return (check);

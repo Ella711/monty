@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 
     if (argc == 2)
     {
-        check = file_open(argv[1]);
+        check = file_open(argv[1], commands);
         command_t.store_check = check;
     }   
     else

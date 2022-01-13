@@ -50,7 +50,7 @@ typedef struct instruction_s
     void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-FILE *file_open(char *argv);
+FILE *file_open(char *argv, char **commands);
 void (*select_command(char **token))(stack_t **stack, unsigned int line_number);
 stack_t *add_dnodeint(stack_t **head, const int n);
 stack_t *create_node_with_data(stack_t **head, int number);
