@@ -51,18 +51,3 @@ void free_stack_t(stack_t **head)
 		free(traverse);
 	}
 }
-/*void free_list(char **commands)
-{
-	if (*commands)
-	{
-		free_list(commands + 1);
-		free(*commands);
-	}
-}
-
-void free_all(char **tokens, char *line)
-{
-	free_list(tokens);
-	free(tokens);
-	free(line);
-}*/
