@@ -53,6 +53,8 @@ stack_t *add_dnodeint(stack_t **head, const int n);
 stack_t *create_node_with_data(stack_t **head, int number);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
 void free_stack_t(stack_t **head);
 /*void free_list(char **commands);
 void free_all(char **tokens, char *line);*/
