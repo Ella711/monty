@@ -37,13 +37,7 @@ int main(int argc, char **argv)
             commands[i] = buffer2;
             buffer2 = strtok(NULL, " \n\t$");
             if (i > 2)
-            {
-                fprintf(stderr, "More than one instruction per line\n");
-                free(buffer);
-                free(commands);
-                fclose(check);
-                return (0);
-            }
+                continue;
             /*printf("Commands[i]: %s\n", commands[i]);*/
         }
         command_t.number = commands[1];
