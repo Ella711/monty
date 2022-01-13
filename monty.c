@@ -7,10 +7,10 @@ int main(int argc, char **argv)
     char *buffer = NULL, *buffer2 = NULL;
     size_t len = 0;
     ssize_t nread;
-    void (*f)(stack_t **stack, unsigned int line_number);
+    void (*f)(stack_t * *stack, unsigned int line_number);
     int line_counter = 0, buff_std = buffstd, i = 0;
     char **commands = malloc(buff_std * sizeof(char *));
-    
+
     if (commands == NULL)
     {
         fprintf(stderr, "Error: malloc failed\n");
@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     {
         check = file_open(argv[1], commands);
         command_t.store_check = check;
-    }   
+    }
     else
     {
         fprintf(stderr, "USAGE: monty file\n");
@@ -35,6 +35,7 @@ int main(int argc, char **argv)
         /*printf("Getline: %s\nnread: %ld\n", buffer, nread);
         printf("Line counter: %d\n", line_counter);*/
         buffer2 = strtok(buffer, " \n\t$#");
+        /*printf("buffer2: %s\n", buffer2);*/
         command_t.line = buffer;
         if (buffer2 == NULL)
             continue;
@@ -42,6 +43,19 @@ int main(int argc, char **argv)
         {
             commands[i] = buffer2;
             buffer2 = strtok(NULL, " \n\t$#");
+            /*printf("commands[i - 1]: %s\n", commands[i]);*/
+            if (strcmp(commands[i], "push") == 0)
+            {
+                if (buffer2 == NULL)
+                {
+                    fprintf(stderr, "USAGE: monty file\n");
+                    free(buffer);
+                    free(commands);
+                    fclose(check);
+                    return (EXIT_FAILURE);
+                }
+            }
+
             if (i > 2)
                 continue;
             /*printf("Commands[i]: %s\n", commands[i]);*/
@@ -59,7 +73,6 @@ int main(int argc, char **argv)
             return (0);
         }
         f(&head, line_counter);
-        
     }
     free_stack_t(&head);
     free(commands);

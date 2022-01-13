@@ -29,7 +29,6 @@ void push(stack_t **stack, unsigned int line_number)
     int command_converted = 0;
     
     /*printf("string: %s\n", command_t.number);*/
-
     if (isdigit_str(command_t.number) == 0)
     {
         fprintf(stderr, "L%d: usage: push integer\n", line_number);
