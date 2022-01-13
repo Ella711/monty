@@ -55,7 +55,7 @@ int main(int argc, char **argv)
                     free_stack_t(&head);
                     free(commands);
                     fclose(check);
-                    return (EXIT_FAILURE);
+                    exit(EXIT_FAILURE);
                 }
             }
             /*printf("Commands[i]: %s\n", commands[i]);*/
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
             free(commands);
             free_stack_t(&head);
             fclose(check);
-            return (0);
+            exit(EXIT_FAILURE);
         }
         f(&head, line_counter);
     }
