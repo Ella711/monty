@@ -62,6 +62,7 @@ void free_stack_t(stack_t **head);
 void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
+void frees_struct(stack_t **stack);
 int isdigit_str(char *token);
 /*void free_list(char **commands);
 void free_all(char **tokens, char *line);*/

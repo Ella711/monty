@@ -10,19 +10,12 @@ void swap(stack_t **stack, unsigned int line_number)
 
     for (; counter; i++)
         counter = counter->next;
-    if (i <= 2 || !*stack || !(*stack)->next || !stack)
+    if (i < 2 || !*stack || !(*stack)->next || !stack)
     {
         fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-        free(command_t.instructions);
-        free_stack_t(stack);
-        free(command_t.line);
-        fclose(command_t.store_check);
+        frees_struct(stack);
         exit(EXIT_FAILURE);
     }
-    /*
-        printf("temp:%d\n", temp->n);
-        printf("temp2:%d\n", temp2->n);
-        printf("temp3:%d\n", temp3->n);*/
     temp = *stack;
     temp2 = (*stack)->next;
     temp3 = (*stack)->next->next;
@@ -51,13 +44,10 @@ void add(stack_t **stack, unsigned int line_number)
 
     for (; counter; i++)
         counter = counter->next;
-    if (i <= 2 || !*stack || !(*stack)->next || !stack)
+    if (i < 2 || !*stack || !(*stack)->next || !stack)
     {
         fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-        free(command_t.instructions);
-        free(command_t.line);
-        free_stack_t(stack);
-        fclose(command_t.store_check);
+        frees_struct(stack);
         exit(EXIT_FAILURE);
     }
     temp->next->n = temp->n + temp->next->n;

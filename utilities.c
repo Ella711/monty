@@ -32,3 +32,11 @@ int isdigit_str(char *token)
 	}
 	return (1);
 }
+
+void frees_struct(stack_t **stack)
+{
+	free(command_t.instructions);
+        free(command_t.line);
+        free_stack_t(stack);
+        fclose(command_t.store_check);
+}
