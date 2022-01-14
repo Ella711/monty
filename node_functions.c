@@ -34,7 +34,7 @@ stack_t *add_dnodeint(stack_t **head, const int n)
 }
 
 /**
- * free_dlistint - frees list
+ * free_stack_t - frees list
  * @head: pointer to head of list
  */
 void free_stack_t(stack_t **head)
@@ -51,3 +51,4 @@ void free_stack_t(stack_t **head)
 		free(traverse);
 	}
 }
+
