@@ -2,7 +2,6 @@
 
 int main(int argc, char **argv)
 {
-    FILE *check = NULL;
     stack_t *head = NULL;
     char *buffer = NULL, *buffer2 = NULL;
     size_t len = 0;
@@ -10,25 +9,15 @@ int main(int argc, char **argv)
     void (*f)(stack_t **stack, unsigned int line_number);
     int line_counter = 0, buff_std = buffstd, i = 0;
     char **commands = malloc(buff_std * sizeof(char *));
+    /*(void)argc; (void)argv;*/
 
     if (commands == NULL)
     {
         fprintf(stderr, "Error: malloc failed\n");
         exit(EXIT_FAILURE);
     }
-
-    if (argc == 2)
-    {
-        check = file_open(argv[1], commands);
-        command_t.store_check = check;
-    }
-    else
-    {
-        fprintf(stderr, "USAGE: monty file\n");
-        free(commands);
-        return (EXIT_FAILURE);
-    }
-    for (line_counter = 1; (nread = getline(&buffer, &len, check)) != -1; line_counter++)
+    file_open(argc, argv, commands);
+    for (line_counter = 1; (nread = getline(&buffer, &len, command_t.store_check)) != -1; line_counter++)
     {
         if (nread == 2)
             continue;
@@ -51,7 +40,7 @@ int main(int argc, char **argv)
                 if (buffer2 == NULL)
                 {
                     fprintf(stderr, "L%d: usage: push integer\n", line_counter);
-                    free_all(buffer, head, commands, check);
+                    free_all(buffer, head, commands, command_t.store_check);
                     exit(EXIT_FAILURE);
                 }
             }
@@ -65,11 +54,11 @@ int main(int argc, char **argv)
         if (f == NULL)
         {
             fprintf(stderr, "L%d: unknown instruction %s\n", line_counter, commands[0]);
-            free_all(buffer, head, commands, check);
+            free_all(buffer, head, commands, command_t.store_check);
             exit(EXIT_FAILURE);
         }
         f(&head, line_counter);
     }
-    free_all(buffer, head, commands, check);
+    free_all(buffer, head, commands, command_t.store_check);
     return (0);
 }

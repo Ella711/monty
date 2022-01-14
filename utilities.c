@@ -1,24 +1,34 @@
 #include "monty.h"
 /**
  * file_open - opens bytecode file
+ * @argc: argument counter
  * @argv: arguements
  * @commands: commands pointer
  * Return: file pointer
  */
-FILE *file_open(char *argv, char **commands)
+void file_open(int argc, char **argv, char **commands)
 {
 	FILE *check = NULL;
 
-	check = fopen(argv, "r");
-
-	if (check == NULL)
+	if (argc == 2)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv);
+		check = fopen(argv[1], "r");
+		if (check == NULL)
+		{
+			fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+			free(commands);
+			exit(EXIT_FAILURE);
+		}
+		command_t.store_check = check;
+	}
+	else
+	{
+		fprintf(stderr, "USAGE: monty file\n");
 		free(commands);
 		exit(EXIT_FAILURE);
 	}
-	return (check);
 }
+
 /**
  * isdigit_str - checks if a string contains all numbers
  * @token: string
