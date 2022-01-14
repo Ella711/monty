@@ -58,18 +58,25 @@ void pchar(stack_t **stack, unsigned int line_number)
         frees_struct(stack);
     }
 }
-/*
+
 void pstr(stack_t **stack, unsigned int line_number)
 {
+    stack_t *temp = NULL;
+    (void)line_number;
 
-    while (*stack)
+    temp = *stack;
+    if (!temp)
     {
-        if ((*stack)->n > 31 && (*stack)->n < 127)
-        {
-            putchar((*stack)->n);
-            putchar('\n');
-        }
-        *stack = (*stack)->next;
+        putchar('\n');
+        return;
     }
+    while (temp)
+    {
+        if (temp->n > 31 && temp->n < 127)
+            putchar(temp->n);
+        else
+            break;
+        temp = temp->next;
+    }
+    putchar('\n');
 }
-*/
