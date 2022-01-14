@@ -16,11 +16,9 @@ void (*select_command(char **token))(stack_t **stack, unsigned int line_number)
 
     for (; op_functions[i].opcode; i++)
     {
-        /*printf("%s\n", op_functions[i].opcode);*/
         if (strcmp(op_functions[i].opcode, token[0]) == 0)
             return (op_functions[i].f);
     }
-    /*printf("Before NULL\n");*/
     return (NULL);
 }
 
@@ -28,7 +26,6 @@ void push(stack_t **stack, unsigned int line_number)
 {
     int command_converted = 0;
     
-    /*printf("string: %s\n", command_t.number);*/
     if (isdigit_str(command_t.number) == 0)
     {
         fprintf(stderr, "L%d: usage: push integer\n", line_number);
@@ -58,7 +55,6 @@ void pall(stack_t **stack, unsigned int line_number)
         printf("%d\n", temp->n);
         temp = temp->next;
     }
-    /*printf("%d", temp->n);*/
 }
 
 void pint(stack_t **stack, unsigned int line_number)
@@ -88,5 +84,4 @@ void pop(stack_t **stack, unsigned int line_number)
     }
     *stack = (*stack)->next;
     free(temp);
-    /*printf("Head is here: %d\n", (*stack)->n);*/
 }

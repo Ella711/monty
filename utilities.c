@@ -39,4 +39,13 @@ void frees_struct(stack_t **stack)
         free(command_t.line);
         free_stack_t(stack);
         fclose(command_t.store_check);
+	exit(EXIT_FAILURE);
+}
+
+void free_all(char *line, stack_t *head, char **commands, FILE *check)
+{
+	free(line);
+	free_stack_t(&head);
+	free(commands);
+	fclose(check);
 }

@@ -7,7 +7,7 @@ int main(int argc, char **argv)
     char *buffer = NULL, *buffer2 = NULL;
     size_t len = 0;
     ssize_t nread;
-    void (*f)(stack_t * *stack, unsigned int line_number);
+    void (*f)(stack_t **stack, unsigned int line_number);
     int line_counter = 0, buff_std = buffstd, i = 0;
     char **commands = malloc(buff_std * sizeof(char *));
 
@@ -51,10 +51,7 @@ int main(int argc, char **argv)
                 if (buffer2 == NULL)
                 {
                     fprintf(stderr, "L%d: usage: push integer\n", line_counter);
-                    free(buffer);
-                    free_stack_t(&head);
-                    free(commands);
-                    fclose(check);
+                    free_all(buffer, head, commands, check);
                     exit(EXIT_FAILURE);
                 }
             }
@@ -67,17 +64,11 @@ int main(int argc, char **argv)
         if (f == NULL)
         {
             fprintf(stderr, "L%d: unknown instruction %s\n", line_counter, commands[0]);
-            free(buffer);
-            free(commands);
-            free_stack_t(&head);
-            fclose(check);
+            free_all(buffer, head, commands, check);
             exit(EXIT_FAILURE);
         }
         f(&head, line_counter);
     }
-    free_stack_t(&head);
-    free(commands);
-    free(buffer);
-    fclose(check);
+    free_all(buffer, head, commands, check);
     return (0);
 }
