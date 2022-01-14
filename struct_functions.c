@@ -17,6 +17,7 @@ void (*select_command(char **token))(stack_t **stack, unsigned int line_number)
         {"mul", mul},
         {"mod", mod},
         {"#", nop},
+        {"pchar", pchar},
         {NULL, NULL}};
 
     for (; op_functions[i].opcode; i++)

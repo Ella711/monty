@@ -38,3 +38,38 @@ void mod(stack_t **stack, unsigned int line_number)
     temp->next->n = temp->next->n % temp->n;
     pop(stack, line_number);
 }
+
+void pchar(stack_t **stack, unsigned int line_number)
+{
+
+    if (!stack || !*stack)
+    {
+        fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
+        frees_struct(stack);
+    }
+    if ((*stack)->n > 31 && (*stack)->n < 127)
+    {
+        putchar((*stack)->n);
+        putchar('\n');
+    }
+    else
+    {
+        fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
+        frees_struct(stack);
+    }
+}
+/*
+void pstr(stack_t **stack, unsigned int line_number)
+{
+
+    while (*stack)
+    {
+        if ((*stack)->n > 31 && (*stack)->n < 127)
+        {
+            putchar((*stack)->n);
+            putchar('\n');
+        }
+        *stack = (*stack)->next;
+    }
+}
+*/
