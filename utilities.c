@@ -6,7 +6,7 @@
  * @commands: commands pointer
  * Return: file pointer
  */
-void file_open(int argc, char **argv, char **commands)
+void file_open(int argc, char **argv)
 {
 	FILE *check = NULL;
 
@@ -16,7 +16,6 @@ void file_open(int argc, char **argv, char **commands)
 		if (check == NULL)
 		{
 			fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-			free(commands);
 			exit(EXIT_FAILURE);
 		}
 		command_t.store_check = check;
@@ -24,7 +23,6 @@ void file_open(int argc, char **argv, char **commands)
 	else
 	{
 		fprintf(stderr, "USAGE: monty file\n");
-		free(commands);
 		exit(EXIT_FAILURE);
 	}
 }

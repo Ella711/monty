@@ -51,4 +51,3 @@ void free_stack_t(stack_t **head)
 		free(traverse);
 	}
 }
-
