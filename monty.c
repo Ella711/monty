@@ -34,16 +34,16 @@ int main(int argc, char **argv)
             continue;
         /*printf("Getline: %s\nnread: %ld\n", buffer, nread);
         printf("Line counter: %d\n", line_counter);*/
-        buffer2 = strtok(buffer, " \n\t$#");
+        buffer2 = strtok(buffer, " \n\t$");
         /*printf("buffer2: %s\n", buffer2);*/
         command_t.line = buffer;
-        if (buffer2 == NULL)
+        if (buffer2 == NULL || buffer2[0] == '#')
             continue;
         for (i = 0; buffer2; i++)
         {
             commands[i] = buffer2;
-            buffer2 = strtok(NULL, " \n\t$#");
-            /*printf("commands[i - 1]: %s\n", commands[i]);*/
+            /*printf("commands[i]: %s\n i: %d\n", commands[i], i);*/
+            buffer2 = strtok(NULL, " \n\t$");
             if (strcmp(commands[i], "push") == 0)
             {
                 if (i >= 2)
@@ -57,7 +57,8 @@ int main(int argc, char **argv)
             }
             /*printf("Commands[i]: %s\n", commands[i]);*/
         }
-
+        /*if (commands[i][0] == '#')
+                break;*/
         command_t.number = commands[1];
         command_t.instructions = commands;
         f = select_command(commands);
