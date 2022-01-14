@@ -3,7 +3,6 @@
  * file_open - opens bytecode file
  * @argc: argument counter
  * @argv: arguements
- * @commands: commands pointer
  * Return: file pointer
  */
 void file_open(int argc, char **argv)
