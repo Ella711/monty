@@ -66,7 +66,7 @@ void frees_struct(stack_t **stack);
 int isdigit_str(char *token);
 void free_all(char *line, stack_t *head, char **commands, FILE *check);
 void sub(stack_t **stack, unsigned int line_number);
-
+void division(stack_t **stack, unsigned int line_number);
 
 
 #endif

@@ -13,6 +13,7 @@ void (*select_command(char **token))(stack_t **stack, unsigned int line_number)
         {"add", add},
         {"nop", nop},
         {"sub", sub},
+        {"div", division},
         {NULL, NULL}};
 
     for (; op_functions[i].opcode; i++)
